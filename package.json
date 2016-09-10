@@ -1,0 +1,28 @@
+{
+  "name": "simple-open-chat",
+  "version": "1.0.0",
+  "description": "A simple open chat web application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjaysagarp/simple-open-chat.git"
+  },
+  "keywords": [
+    "chat",
+    "messenger",
+    "chatroom"
+  ],
+  "author": "Sanjay Sagar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanjaysagarp/simple-open-chat/issues"
+  },
+  "homepage": "https://github.com/sanjaysagarp/simple-open-chat#readme",
+  "dependencies": {
+    "express": "^4.10.2"
+  }
+}
