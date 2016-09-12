@@ -23,6 +23,9 @@
   },
   "homepage": "https://github.com/sanjaysagarp/simple-open-chat#readme",
   "dependencies": {
-    "express": "^4.10.2"
+    "body-parser": "^1.15.2",
+    "express": "^4.10.2",
+    "jade": "^1.11.0",
+    "morgan": "^1.7.0"
   }
 }

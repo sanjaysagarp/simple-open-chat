@@ -1,19 +1,29 @@
 "use strict";
 
-var express = require('express');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var config = require('./config/config');
-var glob = require('glob');
+var express = require('express'),
+	logger = require('morgan'),
+	bodyParser = require('body-parser'),
+	routes = require('./routes'),
+	//socket = require('./routes/socket.js'),
+	config = require('./config/config'),
+	http = require('http');
 
-var app = express();
+var app = module.exports = express();
 
-app.set('views', config.root + 'app/views');
+var server = http.createServer(app);
+
+// hooks socket.io to express
+//var io = require('socket.io').listen(server);
+
+app.set('views', config.root + '/views');
 app.set('view engine', 'jade');
-app.use(logger('dev'));
+app.set('view options', {
+	layout: false
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(config.root + '/public'));
+app.use(logger('dev'));
 
 app.use(function removeTrailingSlashes(req, res, next) {
 	var url = req.url;
@@ -25,11 +35,15 @@ app.use(function removeTrailingSlashes(req, res, next) {
 	}
 });
 
-var controllers = glob.sync(config.root + '/app/controllers/*.js');
-controllers.forEach(function(controller) {
-	require(controller)(app);
-});
+// Routes
 
-app.listen(80, function() {
+app.get('/', routes.index);
+app.get('/partials/:name', routes.partials);
+
+// Socket.io Communication
+
+//io.sockets.on('connection', socket);
+
+server.listen(80, function() {
 	console.log('server is listening...'); 
 });
